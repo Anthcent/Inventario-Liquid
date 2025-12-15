@@ -1,34 +1,50 @@
-name: Publish Website to CPanel
+name: Deploy to InfinityFree via FTP
+
 on:
   push:
     branches:
       - main
-jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
-    runs-on: ubuntu-latest
-    steps:
-      # Paso 1: Checkout del Código
-      - uses: actions/checkout@v2.1.0
-        with:
-          # Mantenemos 0 para evitar problemas de historial
-          fetch-depth: 0 
 
-      # Paso 2: Despliegue FTP (Ahora usando la ruta correcta)
-      - name: Deploy to InfinityFree (FTP)
-        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+jobs:
+  deploy:
+    name: Deploy to InfinityFree
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Paso 1: Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          # Servidor, Usuario y Contraseña (¡Verificados como correctos!)
-          ftp-server: ${{ secrets.FTP_SERVER }}
-          ftp-username: ${{ secrets.FTP_USERNAME }}
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
+          fetch-depth: 2
+      
+      # Paso 2: Despliegue FTP a InfinityFree
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          # Credenciales FTP (configuradas en GitHub Secrets)
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           
-          # 1. SOLUCIÓN AL ERROR DE GIT: Forzar la carga completa para evitar el "git failed with exit code 8"
-          git-ftp-args: "--no-commit"
+          # Directorio remoto en el servidor (htdocs para InfinityFree)
+          server-dir: /htdocs/
           
-          # 2. RUTA CORRECTA: Se usa 'ftp-base-path' en lugar de 'remote-dir' para esta acción
-          # 'htdocs/' es la ruta raíz web para InfinityFree.
-          ftp-base-path: "htdocs/"
+          # Directorio local a subir (raíz del proyecto)
+          local-dir: ./
           
-          # Opcional: Si tu proyecto compila a una carpeta (ej: React/Vue), usa esta línea:
-          # local-dir: "dist/"
+          # Archivos y carpetas a excluir del despliegue
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            **/README.md
+            **/CORRECCIONES.md
+            **/MODAL_BETA.md
+            **/.vscode/**
+            **/.idea/**
+            **/uploads/.gitkeep
+          
+          # Opciones adicionales
+          dangerous-clean-slate: false
+          log-level: verbose
