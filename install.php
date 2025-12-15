@@ -2,11 +2,28 @@
 // JabonesPOS Installation Script
 // Run this file to setup the database structure.
 
-$host = 'sql101.infinityfree.com';
-$user = 'if0_40687916';
-$pass = 'wgLejdg0EC18';
-$dbname = 'if0_40687916_jabon';
-$port = '3306';
+// Detectar si estamos en servidor local o producción
+$isLocal = in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1']) || 
+           strpos($_SERVER['SERVER_NAME'], '.local') !== false ||
+           strpos($_SERVER['HTTP_HOST'], 'localhost') !== false;
+
+if ($isLocal) {
+    // CONFIGURACIÓN LOCAL (XAMPP/WAMP/MAMP)
+    $host = 'localhost';
+    $user = 'root';
+    $pass = '';
+    $dbname = 'inventario_liquid_local';
+    $port = '3306';
+    $environment = 'LOCAL';
+} else {
+    // CONFIGURACIÓN PRODUCCIÓN (InfinityFree)
+    $host = 'sql101.infinityfree.com';
+    $user = 'if0_40687916';
+    $pass = 'wgLejdg0EC18';
+    $dbname = 'if0_40687916_jabon';
+    $port = '3306';
+    $environment = 'PRODUCCIÓN';
+}
 
 $message = '';
 
@@ -125,6 +142,19 @@ try {
             </div>
             <h1 class="text-3xl font-bold mb-2">Instalador de Sistema</h1>
             <p class="text-gray-400">Configuración automática de base de datos</p>
+            
+            <!-- Environment Badge -->
+            <div class="mt-4">
+                <?php if ($isLocal): ?>
+                    <span class="px-3 py-1 bg-green-500/20 border border-green-500/30 text-green-400 rounded-full text-xs font-bold">
+                        <i class="fa-solid fa-laptop-code"></i> ENTORNO: LOCAL
+                    </span>
+                <?php else: ?>
+                    <span class="px-3 py-1 bg-purple-500/20 border border-purple-500/30 text-purple-400 rounded-full text-xs font-bold">
+                        <i class="fa-solid fa-cloud"></i> ENTORNO: PRODUCCIÓN
+                    </span>
+                <?php endif; ?>
+            </div>
         </div>
 
         <?php if($message): ?>
@@ -141,7 +171,7 @@ try {
                     <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-700">
                         <h3 class="font-bold text-gray-300 mb-2 text-sm uppercase tracking-wide">Se instalará:</h3>
                         <ul class="text-sm text-gray-400 space-y-2">
-                            <li><i class="fa-solid fa-database w-6 text-blue-400"></i> Base de datos 'jabones_pos_db'</li>
+                            <li><i class="fa-solid fa-database w-6 text-blue-400"></i> Base de datos '<?php echo $dbname; ?>'</li>
                             <li><i class="fa-solid fa-table w-6 text-purple-400"></i> Tablas de Productos y Categorías</li>
                             <li><i class="fa-solid fa-receipt w-6 text-green-400"></i> Sistema de Ventas</li>
                             <li><i class="fa-solid fa-gears w-6 text-orange-400"></i> Configuración Inicial</li>
