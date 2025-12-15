@@ -8,17 +8,31 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
+      # Paso 1: Checkout del Código
       - uses: actions/checkout@v2.1.0
         with:
-          # Mantenemos fetch-depth: 0 o 2, ya que la línea de abajo lo corrige
-          fetch-depth: 0
-      - name: FTP-Deploy-Action
+          # Mantenemos 0 para asegurar que el historial esté completo, 
+          # aunque usaremos --no-commit para evitar el error de Git.
+          fetch-depth: 0 
+
+      # Paso 2: Despliegue FTP
+      - name: Deploy to InfinityFree (FTP)
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
+          # Servidor FTP: Usamos el HOSTNAME de InfinityFree
           ftp-server: ${{ secrets.FTP_SERVER }}
+          
+          # Credenciales FTP
           ftp-username: ${{ secrets.FTP_USERNAME }}
           ftp-password: ${{ secrets.FTP_PASSWORD }}
-          # SOLUCIÓN: Desactiva el uso de Git para detectar cambios, forzando la carga completa
+          
+          # CONFIGURACIONES CRÍTICAS
+          
+          # 1. SOLUCIÓN AL ERROR: Forzar la carga completa para evitar el "git failed with exit code 8"
           git-ftp-args: "--no-commit"
-          # Opcional: Si necesitas subir un subdirectorio, añade esto:
+          
+          # 2. RUTA CORRECTA: Tu hosting usa 'htdocs' como directorio raíz web
+          remote-dir: "htdocs/"
+          
+          # 3. RUTA LOCAL (si aplica): Descomenta y ajusta si compilas tu proyecto (ej: React, Vue)
           # local-dir: "dist/"
