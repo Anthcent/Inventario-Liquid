@@ -508,6 +508,7 @@ document.addEventListener('alpine:init', () => {
         products: [],
         cart: [],
         search: '',
+        showMobileCart: false, // Control del carrito móvil
         
         // Calculator State
         showCalculator: false,
