@@ -5,9 +5,23 @@
  */
 
 // Detectar si estamos en servidor local o producción
-$isLocal = in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1']) || 
-           strpos($_SERVER['SERVER_NAME'], '.local') !== false ||
-           strpos($_SERVER['HTTP_HOST'], 'localhost') !== false;
+// Mejorado para detectar correctamente InfinityFree
+$serverName = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+$isLocal = (
+    in_array($serverName, ['localhost', '127.0.0.1']) || 
+    strpos($serverName, '.local') !== false ||
+    strpos($serverName, 'localhost') !== false ||
+    // Si el servidor es una IP privada (192.168.x.x, 10.x.x.x)
+    (preg_match('/^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/i', $serverName))
+);
+
+// Si contiene dominios de hosting gratuito, forzar producción
+if (strpos($serverName, '.42web.io') !== false || 
+    strpos($serverName, '.infinityfreeapp.com') !== false ||
+    strpos($serverName, '.rf.gd') !== false) {
+    $isLocal = false;
+}
 
 if ($isLocal) {
     // ========================================
