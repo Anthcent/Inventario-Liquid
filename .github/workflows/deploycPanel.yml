@@ -10,8 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.1.0
         with:
-          # CORRECCIÓN: Se cambia a 0 para descargar el historial completo de Git 
-          # y evitar el error "git failed with exit code 8".
+          # Mantenemos fetch-depth: 0 o 2, ya que la línea de abajo lo corrige
           fetch-depth: 0
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
@@ -19,3 +18,7 @@ jobs:
           ftp-server: ${{ secrets.FTP_SERVER }}
           ftp-username: ${{ secrets.FTP_USERNAME }}
           ftp-password: ${{ secrets.FTP_PASSWORD }}
+          # SOLUCIÓN: Desactiva el uso de Git para detectar cambios, forzando la carga completa
+          git-ftp-args: "--no-commit"
+          # Opcional: Si necesitas subir un subdirectorio, añade esto:
+          # local-dir: "dist/"
