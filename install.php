@@ -2,17 +2,18 @@
 // JabonesPOS Installation Script
 // Run this file to setup the database structure.
 
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$dbname = 'jabones_pos_db';
+$host = 'sql101.infinityfree.com';
+$user = 'if0_40687916';
+$pass = 'wgLejdg0EC18';
+$dbname = 'if0_40687916_jabon';
+$port = '3306';
 
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // 1. Create Database if not exists
-        $pdo = new PDO("mysql:host=$host", $user, $pass);
+        $pdo = new PDO("mysql:host=$host;port=$port", $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
@@ -51,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "CREATE TABLE IF NOT EXISTS sales (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 total_amount DECIMAL(10,2) NOT NULL,
+                payment_method VARCHAR(50) DEFAULT 'cash',
+                amount_tendered DECIMAL(10,2) DEFAULT 0.00,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )",
 
@@ -87,9 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 \$dbname = '$dbname';
 \$username = '$user';
 \$password = '$pass';
+\$port = '$port';
 
 try {
-    \$pdo = new PDO(\"mysql:host=\$host;dbname=\$dbname;charset=utf8mb4\", \$username, \$password);
+    \$pdo = new PDO(\"mysql:host=\$host;port=\$port;dbname=\$dbname;charset=utf8mb4\", \$username, \$password);
     \$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException \$e) {
     die(\"Error de conexión: \" . \$e->getMessage());
