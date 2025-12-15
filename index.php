@@ -174,7 +174,7 @@
 <div x-data="pos" class="w-full px-2 md:px-6 h-[calc(100vh-60px)] md:h-[calc(100vh-80px)] flex flex-col lg:flex-row gap-3 md:gap-4 pt-2 md:pt-4 pb-2 md:pb-4">
     
     <!-- Left Column: Products -->
-    <div class="lg:w-2/3 flex flex-col h-full bg-transparent dark:bg-dark-bg order-2 lg:order-1">
+    <div class="lg:w-2/3 flex flex-col h-full bg-transparent dark:bg-dark-bg">
         <!-- Search Bar -->
         <div class="mb-4 relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -261,8 +261,7 @@
 
     <!-- Right Column: Cart (Mobile Optimized) -->
     <div class="lg:w-1/3 flex flex-col lg:h-full bg-white dark:bg-dark-card rounded-t-3xl lg:rounded-3xl border-t lg:border border-gray-200 dark:border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] lg:shadow-2xl overflow-hidden z-30 fixed lg:static bottom-0 left-0 right-0 h-[80px] lg:h-full transition-all duration-300"
-         :class="{'h-[80vh]': showMobileCart}"
-         order="1">
+         :class="{'h-[80vh]': showMobileCart}">
         
         <!-- Cart Toggle (Mobile Only) -->
         <div @click="showMobileCart = !showMobileCart" class="lg:hidden w-full flex justify-center pt-2 pb-1 cursor-pointer">
