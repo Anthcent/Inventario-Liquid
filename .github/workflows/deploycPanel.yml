@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2.1.0
         with:
-          fetch-depth: 2
+          # CORRECCIÓN: Se cambia a 0 para descargar el historial completo de Git 
+          # y evitar el error "git failed with exit code 8".
+          fetch-depth: 0
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
