@@ -284,7 +284,11 @@
         </div>
 
         <!-- Cart Items List -->
-        <div class="flex-grow overflow-y-auto p-4 space-y-4 custom-scrollbar">
+        <div class="flex-grow overflow-y-auto p-4 space-y-4 custom-scrollbar"
+             x-show="showMobileCart || window.innerWidth >= 1024"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100">
              <template x-for="(item, index) in cart" :key="index">
                 <div class="bg-gray-50 dark:bg-dark-bg rounded-xl p-4 border border-gray-200 dark:border-white/5 relative group animate-fade-in-right">
                     
@@ -328,7 +332,11 @@
         </div>
 
         <!-- Pay Section -->
-        <div class="p-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/5">
+        <div class="p-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/5"
+             x-show="showMobileCart || window.innerWidth >= 1024"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0">
             <div class="flex justify-between items-end mb-6">
                 <span class="text-gray-500 dark:text-gray-400 font-medium">Total a Pagar</span>
                 <span class="text-4xl font-black text-gray-900 dark:text-white tracking-tighter">$ <span x-text="cartTotal"></span></span>
