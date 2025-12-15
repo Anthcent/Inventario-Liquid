@@ -17,89 +17,83 @@
     </div>
 
     <!-- Modal Content -->
-    <div class="relative max-w-2xl w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl border border-white/10 overflow-hidden transform transition-all animate-scale-in">
+    <div class="relative max-w-2xl w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl border border-white/10 overflow-auto max-h-[90vh] md:max-h-none transform transition-all animate-scale-in">
         
         <!-- Glowing Border Effect -->
         <div class="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-20 blur-xl"></div>
         
         <!-- Content Container -->
-        <div class="relative z-10 p-8 md:p-12">
+        <div class="relative z-10 p-6 md:p-12">
             
             <!-- Animated Icon -->
-            <div class="flex justify-center mb-8">
+            <div class="flex justify-center mb-6 md:mb-8">
                 <div class="relative">
                     <!-- Pulsing Rings -->
                     <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-20 animate-ping"></div>
                     <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-30 animate-pulse"></div>
                     
                     <!-- Main Icon Container -->
-                    <div class="relative w-24 h-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/50 transform rotate-6 hover:rotate-0 transition-transform duration-500">
-                        <i class="fa-solid fa-flask text-4xl text-white animate-bounce-slow"></i>
+                    <div class="relative w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/50 transform rotate-6 hover:rotate-0 transition-transform duration-500">
+                        <i class="fa-solid fa-flask text-2xl md:text-4xl text-white animate-bounce-slow"></i>
                     </div>
-                    
-                    <!-- Floating Sparkles -->
-                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full animate-ping"></div>
-                    <div class="absolute -bottom-1 -left-1 w-4 h-4 bg-cyan-400 rounded-full animate-pulse"></div>
                 </div>
             </div>
 
             <!-- Title with Gradient Text -->
             <div class="text-center mb-6">
-                <h1 class="text-5xl md:text-6xl font-black mb-3 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
+                <h1 class="text-3xl md:text-6xl font-black mb-3 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
                     VERSIÓN DEMO
                 </h1>
                 <div class="flex items-center justify-center gap-3 mb-4">
-                    <div class="h-px w-16 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-                    <span class="px-4 py-1.5 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm font-bold rounded-full shadow-lg shadow-orange-500/50 animate-pulse-slow">
+                    <div class="h-px w-8 md:w-16 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+                    <span class="px-4 py-1.5 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-xs md:text-sm font-bold rounded-full shadow-lg shadow-orange-500/50 animate-pulse-slow">
                         BETA
                     </span>
-                    <div class="h-px w-16 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+                    <div class="h-px w-8 md:w-16 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
                 </div>
             </div>
 
             <!-- Main Message -->
-            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10 mb-6">
-                <p class="text-gray-200 text-lg md:text-xl leading-relaxed text-center mb-4">
-                    Bienvenido al <span class="font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">Sistema de Inventario Liquid</span>
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4 md:p-8 border border-white/10 mb-6">
+                <p class="text-gray-200 text-base md:text-xl leading-relaxed text-center mb-2 md:mb-4">
+                    Bienvenido al <span class="font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">Sistema Liquid</span>
                 </p>
-                <p class="text-gray-300 text-base md:text-lg leading-relaxed text-center">
-                    Esta es una <span class="font-bold text-emerald-400">versión BETA</span> en desarrollo activo. 
-                    Puedes enviar <span class="font-bold text-yellow-400">una (1) propuesta de cambios</span> 
-                    para su finalización y personalización según tus necesidades.
+                <p class="text-gray-300 text-sm md:text-lg leading-relaxed text-center">
+                    Esta es una <span class="font-bold text-emerald-400">versión BETA</span>.
+                    Puedes enviar <span class="font-bold text-yellow-400">una (1) propuesta</span> de cambios.
                 </p>
             </div>
 
             <!-- Features Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <div class="bg-gradient-to-br from-blue-500/10 to-blue-600/10 backdrop-blur-sm rounded-xl p-4 border border-blue-500/20 text-center transform hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-rocket text-3xl text-blue-400 mb-2"></i>
-                    <p class="text-sm text-gray-300 font-medium">En Desarrollo</p>
+            <div class="grid grid-cols-3 gap-2 md:gap-4 mb-8">
+                <div class="bg-gradient-to-br from-blue-500/10 to-blue-600/10 backdrop-blur-sm rounded-xl p-2 md:p-4 border border-blue-500/20 text-center">
+                    <i class="fa-solid fa-rocket text-xl md:text-3xl text-blue-400 mb-1 md:mb-2"></i>
+                    <p class="text-[10px] md:text-sm text-gray-300 font-medium">En Desarrollo</p>
                 </div>
-                <div class="bg-gradient-to-br from-purple-500/10 to-purple-600/10 backdrop-blur-sm rounded-xl p-4 border border-purple-500/20 text-center transform hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-code text-3xl text-purple-400 mb-2"></i>
-                    <p class="text-sm text-gray-300 font-medium">Personalizable</p>
+                <div class="bg-gradient-to-br from-purple-500/10 to-purple-600/10 backdrop-blur-sm rounded-xl p-2 md:p-4 border border-purple-500/20 text-center">
+                    <i class="fa-solid fa-code text-xl md:text-3xl text-purple-400 mb-1 md:mb-2"></i>
+                    <p class="text-[10px] md:text-sm text-gray-300 font-medium">Flexible</p>
                 </div>
-                <div class="bg-gradient-to-br from-pink-500/10 to-pink-600/10 backdrop-blur-sm rounded-xl p-4 border border-pink-500/20 text-center transform hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-star text-3xl text-pink-400 mb-2"></i>
-                    <p class="text-sm text-gray-300 font-medium">1 Propuesta</p>
+                <div class="bg-gradient-to-br from-pink-500/10 to-pink-600/10 backdrop-blur-sm rounded-xl p-2 md:p-4 border border-pink-500/20 text-center">
+                    <i class="fa-solid fa-star text-xl md:text-3xl text-pink-400 mb-1 md:mb-2"></i>
+                    <p class="text-[10px] md:text-sm text-gray-300 font-medium">1 Propuesta</p>
                 </div>
             </div>
 
             <!-- Action Button -->
             <button @click="showBetaModal = false; localStorage.setItem('betaModalSeen', 'true')" 
-                    class="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl shadow-purple-500/50 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3 text-lg">
-                <span>Comenzar a Explorar</span>
+                    class="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold py-3 md:py-4 px-8 rounded-2xl shadow-2xl shadow-purple-500/50 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3 text-base md:text-lg">
+                <span>Comenzar</span>
                 <i class="fa-solid fa-arrow-right animate-bounce-horizontal"></i>
             </button>
 
             <!-- Footer Note -->
-            <p class="text-center text-gray-500 text-xs mt-6">
+            <p class="text-center text-gray-500 text-[10px] md:text-xs mt-4 md:mt-6">
                 <i class="fa-solid fa-info-circle mr-1"></i>
                 Este mensaje no se volverá a mostrar
             </p>
         </div>
-
-        <!-- Decorative Corner Elements -->
+    </div>      <!-- Decorative Corner Elements -->
         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-bl-full"></div>
         <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-500/20 to-transparent rounded-tr-full"></div>
     </div>
