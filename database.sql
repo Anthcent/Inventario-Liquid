@@ -1,6 +1,6 @@
 -- ============================================
 -- Sistema de Inventario Liquid - Base de Datos
--- Versión: 1.0
+-- Versión: 1.1 (Con Imágenes)
 -- Fecha: 2025-12-15
 -- ============================================
 
@@ -25,11 +25,12 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Datos de ejemplo para categories
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`) VALUES
-(1, 'Detergentes', 'Detergentes líquidos y en polvo', NOW()),
-(2, 'Suavizantes', 'Suavizantes de ropa', NOW()),
-(3, 'Limpiadores', 'Limpiadores de piso y superficies', NOW()),
-(4, 'Desengrasantes', 'Para cocina y uso industrial', NOW());
+INSERT IGNORE INTO `categories` (`id`, `name`, `description`) VALUES
+(1, 'Detergentes', 'Detergentes líquidos y en polvo'),
+(2, 'Suavizantes', 'Suavizantes de ropa'),
+(3, 'Limpiadores', 'Limpiadores de piso y superficies'),
+(4, 'Automotriz', 'Productos para lavado de autos'),
+(5, 'Accesorios', 'Esponjas, paños y envases');
 
 -- ============================================
 -- Tabla: products
@@ -85,30 +86,6 @@ CREATE TABLE IF NOT EXISTS `sale_items` (
   CONSTRAINT `sale_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- AUTO_INCREMENT para tablas
--- ============================================
-
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `sale_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
--- ============================================
--- Instalación Completada
--- ============================================
--- Base de datos creada exitosamente
--- Tablas: categories, products, sales, sale_items
--- Datos de ejemplo: 4 categorías
--- ============================================
