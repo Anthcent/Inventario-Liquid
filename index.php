@@ -1,6 +1,182 @@
 <?php require_once 'includes/header.php'; ?>
 <?php require_once 'includes/nav.php'; ?>
 
+<!-- BETA WELCOME MODAL -->
+<div x-data="{ showBetaModal: !localStorage.getItem('betaModalSeen') }" 
+     x-show="showBetaModal" 
+     x-cloak
+     class="fixed inset-0 z-[100] flex items-center justify-center p-4"
+     style="display: none;">
+    
+    <!-- Animated Background Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-95 backdrop-blur-xl">
+        <!-- Animated Gradient Orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Modal Content -->
+    <div class="relative max-w-2xl w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl border border-white/10 overflow-hidden transform transition-all animate-scale-in">
+        
+        <!-- Glowing Border Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-20 blur-xl"></div>
+        
+        <!-- Content Container -->
+        <div class="relative z-10 p-8 md:p-12">
+            
+            <!-- Animated Icon -->
+            <div class="flex justify-center mb-8">
+                <div class="relative">
+                    <!-- Pulsing Rings -->
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-20 animate-ping"></div>
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-30 animate-pulse"></div>
+                    
+                    <!-- Main Icon Container -->
+                    <div class="relative w-24 h-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/50 transform rotate-6 hover:rotate-0 transition-transform duration-500">
+                        <i class="fa-solid fa-flask text-4xl text-white animate-bounce-slow"></i>
+                    </div>
+                    
+                    <!-- Floating Sparkles -->
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full animate-ping"></div>
+                    <div class="absolute -bottom-1 -left-1 w-4 h-4 bg-cyan-400 rounded-full animate-pulse"></div>
+                </div>
+            </div>
+
+            <!-- Title with Gradient Text -->
+            <div class="text-center mb-6">
+                <h1 class="text-5xl md:text-6xl font-black mb-3 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
+                    VERSIÓN DEMO
+                </h1>
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <div class="h-px w-16 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+                    <span class="px-4 py-1.5 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm font-bold rounded-full shadow-lg shadow-orange-500/50 animate-pulse-slow">
+                        BETA
+                    </span>
+                    <div class="h-px w-16 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+                </div>
+            </div>
+
+            <!-- Main Message -->
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10 mb-6">
+                <p class="text-gray-200 text-lg md:text-xl leading-relaxed text-center mb-4">
+                    Bienvenido al <span class="font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">Sistema de Inventario Liquid</span>
+                </p>
+                <p class="text-gray-300 text-base md:text-lg leading-relaxed text-center">
+                    Esta es una <span class="font-bold text-emerald-400">versión BETA</span> en desarrollo activo. 
+                    Puedes enviar <span class="font-bold text-yellow-400">una (1) propuesta de cambios</span> 
+                    para su finalización y personalización según tus necesidades.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-gradient-to-br from-blue-500/10 to-blue-600/10 backdrop-blur-sm rounded-xl p-4 border border-blue-500/20 text-center transform hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-rocket text-3xl text-blue-400 mb-2"></i>
+                    <p class="text-sm text-gray-300 font-medium">En Desarrollo</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500/10 to-purple-600/10 backdrop-blur-sm rounded-xl p-4 border border-purple-500/20 text-center transform hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-code text-3xl text-purple-400 mb-2"></i>
+                    <p class="text-sm text-gray-300 font-medium">Personalizable</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-500/10 to-pink-600/10 backdrop-blur-sm rounded-xl p-4 border border-pink-500/20 text-center transform hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-star text-3xl text-pink-400 mb-2"></i>
+                    <p class="text-sm text-gray-300 font-medium">1 Propuesta</p>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button @click="showBetaModal = false; localStorage.setItem('betaModalSeen', 'true')" 
+                    class="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl shadow-purple-500/50 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3 text-lg">
+                <span>Comenzar a Explorar</span>
+                <i class="fa-solid fa-arrow-right animate-bounce-horizontal"></i>
+            </button>
+
+            <!-- Footer Note -->
+            <p class="text-center text-gray-500 text-xs mt-6">
+                <i class="fa-solid fa-info-circle mr-1"></i>
+                Este mensaje no se volverá a mostrar
+            </p>
+        </div>
+
+        <!-- Decorative Corner Elements -->
+        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-bl-full"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-500/20 to-transparent rounded-tr-full"></div>
+    </div>
+</div>
+
+<!-- Custom Animations Styles -->
+<style>
+    @keyframes gradient-x {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes blob {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(20px, -50px) scale(1.1); }
+        50% { transform: translate(-20px, 20px) scale(0.9); }
+        75% { transform: translate(50px, 50px) scale(1.05); }
+    }
+    
+    @keyframes scale-in {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes bounce-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes bounce-horizontal {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(5px); }
+    }
+    
+    @keyframes pulse-slow {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    
+    .animate-gradient-x {
+        background-size: 200% 200%;
+        animation: gradient-x 3s ease infinite;
+    }
+    
+    .animate-blob {
+        animation: blob 7s infinite;
+    }
+    
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+    
+    .animate-scale-in {
+        animation: scale-in 0.5s ease-out;
+    }
+    
+    .animate-bounce-slow {
+        animation: bounce-slow 2s ease-in-out infinite;
+    }
+    
+    .animate-bounce-horizontal {
+        animation: bounce-horizontal 1s ease-in-out infinite;
+    }
+    
+    .animate-pulse-slow {
+        animation: pulse-slow 3s ease-in-out infinite;
+    }
+    
+    [x-cloak] { 
+        display: none !important; 
+    }
+</style>
+
 <div x-data="pos" class="w-full px-4 md:px-6 h-[calc(100vh-80px)] flex flex-col lg:flex-row gap-4 pt-4 pb-4">
     
     <!-- Left Column: Products -->
