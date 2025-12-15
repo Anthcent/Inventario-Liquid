@@ -1,0 +1,34 @@
+name: Publish Website to CPanel
+on:
+  push:
+    branches:
+      - main
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+      # Paso 1: Checkout del Código
+      - uses: actions/checkout@v2.1.0
+        with:
+          # Mantenemos 0 para evitar problemas de historial
+          fetch-depth: 0 
+
+      # Paso 2: Despliegue FTP (Ahora usando la ruta correcta)
+      - name: Deploy to InfinityFree (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        with:
+          # Servidor, Usuario y Contraseña (¡Verificados como correctos!)
+          ftp-server: ${{ secrets.FTP_SERVER }}
+          ftp-username: ${{ secrets.FTP_USERNAME }}
+          ftp-password: ${{ secrets.FTP_PASSWORD }}
+          
+          # 1. SOLUCIÓN AL ERROR DE GIT: Forzar la carga completa para evitar el "git failed with exit code 8"
+          git-ftp-args: "--no-commit"
+          
+          # 2. RUTA CORRECTA: Se usa 'ftp-base-path' en lugar de 'remote-dir' para esta acción
+          # 'htdocs/' es la ruta raíz web para InfinityFree.
+          ftp-base-path: "htdocs/"
+          
+          # Opcional: Si tu proyecto compila a una carpeta (ej: React/Vue), usa esta línea:
+          # local-dir: "dist/"
