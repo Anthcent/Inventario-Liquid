@@ -11,28 +11,24 @@ jobs:
       # Paso 1: Checkout del Código
       - uses: actions/checkout@v2.1.0
         with:
-          # Mantenemos 0 para asegurar que el historial esté completo, 
-          # aunque usaremos --no-commit para evitar el error de Git.
+          # Mantenemos 0 para evitar problemas de historial
           fetch-depth: 0 
 
-      # Paso 2: Despliegue FTP
+      # Paso 2: Despliegue FTP (Ahora usando la ruta correcta)
       - name: Deploy to InfinityFree (FTP)
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
-          # Servidor FTP: Usamos el HOSTNAME de InfinityFree
+          # Servidor, Usuario y Contraseña (¡Verificados como correctos!)
           ftp-server: ${{ secrets.FTP_SERVER }}
-          
-          # Credenciales FTP
           ftp-username: ${{ secrets.FTP_USERNAME }}
           ftp-password: ${{ secrets.FTP_PASSWORD }}
           
-          # CONFIGURACIONES CRÍTICAS
-          
-          # 1. SOLUCIÓN AL ERROR: Forzar la carga completa para evitar el "git failed with exit code 8"
+          # 1. SOLUCIÓN AL ERROR DE GIT: Forzar la carga completa para evitar el "git failed with exit code 8"
           git-ftp-args: "--no-commit"
           
-          # 2. RUTA CORRECTA: Tu hosting usa 'htdocs' como directorio raíz web
-          remote-dir: "htdocs/"
+          # 2. RUTA CORRECTA: Se usa 'ftp-base-path' en lugar de 'remote-dir' para esta acción
+          # 'htdocs/' es la ruta raíz web para InfinityFree.
+          ftp-base-path: "htdocs/"
           
-          # 3. RUTA LOCAL (si aplica): Descomenta y ajusta si compilas tu proyecto (ej: React, Vue)
+          # Opcional: Si tu proyecto compila a una carpeta (ej: React/Vue), usa esta línea:
           # local-dir: "dist/"
