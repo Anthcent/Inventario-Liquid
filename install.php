@@ -149,22 +149,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             // Demo Data
             $products = [
-                // Líquidos
-                [1, 'Detergente Líquido Premium', 'DET-LIQ-01', 'MarcaPropia', 1, 'Litro', 15.00, 8.50, 200.00, 20],
-                [1, 'Detergente Bebé', 'DET-BEB-01', 'Suave', 1, 'Litro', 18.50, 10.00, 50.00, 10],
-                [2, 'Suavizante Floral', 'SUA-FLO-01', 'AromaMax', 1, 'Litro', 12.00, 6.00, 150.00, 20],
-                [3, 'Cloro Gel', 'CLO-GEL-01', 'Limpiex', 1, 'Litro', 8.00, 4.00, 300.00, 30],
-                [3, 'Desengrasante Cítrico', 'DES-IND-01', 'PowerClean', 1, 'Galón', 45.00, 25.00, 40.00, 5],
-                // Sólidos/Unidades
-                [1, 'Detergente Polvo', 'DET-POL-01', 'Bio', 0, 'Kg', 22.00, 11.00, 100.00, 15],
-                [5, 'Esponja Doble', 'ESP-001', 'Generic', 0, 'Unidad', 5.00, 2.00, 500.00, 50],
+                // Líquidos con Imágenes y Fallbacks
+                [1, 'Detergente Líquido Premium', 'DET-LIQ-01', 'MarcaPropia', 1, 'Litro', 15.00, 8.50, 200.00, 20, 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&q=80'],
+                [1, 'Detergente Bebé Hipoalergénico', 'DET-BEB-01', 'Suave', 1, 'Litro', 18.50, 10.00, 50.00, 10, 'https://images.unsplash.com/photo-1528740561666-dc24705f08a7?w=400&q=80'],
+                [2, 'Suavizante Floral Intense', 'SUA-FLO-01', 'AromaMax', 1, 'Litro', 12.00, 6.00, 150.00, 20, 'https://images.unsplash.com/photo-1626379953822-baec19c3accd?w=400&q=80'],
+                [3, 'Cloro Gel Desinfectante', 'CLO-GEL-01', 'Limpiex', 1, 'Litro', 8.00, 4.00, 300.00, 30, 'https://images.unsplash.com/photo-1585832770485-e68a5dbfad52?w=400&q=80'],
+                [3, 'Desengrasante Industrial Cítrico', 'DES-IND-01', 'PowerClean', 1, 'Galón', 45.00, 25.00, 40.00, 5, 'https://images.unsplash.com/photo-1628191139360-4083564d03fd?w=400&q=80'],
+                [4, 'Shampoo con Cera para Autos', 'AUTO-SH-01', 'CarWash', 1, 'Litro', 25.00, 12.50, 80.00, 10, 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=400&q=80'],
+                
+                // Sólidos/Unidades con Imágenes
+                [1, 'Detergente en Polvo Bio', 'DET-POL-01', 'BioActive', 0, 'Kg', 22.00, 11.00, 100.00, 15, 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400&q=80'],
+                [5, 'Esponja Doble Fibra', 'ESP-001', 'Scotch', 0, 'Unidad', 5.00, 2.00, 500.00, 50, 'https://plus.unsplash.com/premium_photo-1678248747443-4672e8739665?w=400&q=80'],
+                
+                // Productos sin imagen para probar el fallback
+                [5, 'Envase Plástico 1 Litro', 'ENV-1L', 'Genérico', 0, 'Unidad', 3.50, 1.50, 200.00, 20, null],
+                [3, 'Bicarbonato de Sodio', 'BIC-01', 'Natural', 0, 'Kg', 10.00, 5.00, 50.00, 10, null]
             ];
 
-            $sql = "INSERT INTO products (category_id, name, sku, brand, is_liquid, display_unit, price, cost_price, stock_quantity, min_stock) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            // IMPORTANTE: Se agregó image_path (11 valores ahora)
+            $sql = "INSERT INTO products (category_id, name, sku, brand, is_liquid, display_unit, price, cost_price, stock_quantity, min_stock, image_path) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
 
             foreach ($products as $p) {
-                // Check if SKU exists
+                // Check if SKU exists to avoid duplicates
                 $check = $pdo->prepare("SELECT id FROM products WHERE sku = ?");
                 $check->execute([$p[2]]);
                 if($check->rowCount() == 0) $stmt->execute($p);

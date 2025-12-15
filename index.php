@@ -196,16 +196,35 @@
                 <template x-for="product in filteredProducts" :key="product.id">
                     <div @click="addToCart(product)" class="glass p-4 rounded-2xl border border-gray-200 dark:border-white/5 group hover:border-brand-500/30 transition-all relative overflow-hidden flex flex-col justify-between h-auto min-h-[200px] cursor-pointer active:scale-[0.98]">
                         
-                        <!-- Header: Icon & Stock -->
-                        <div class="flex justify-between items-start mb-3">
-                             <div class="w-10 h-10 rounded-full flex items-center justify-center"
-                                :class="product.is_liquid == 1 ? 'bg-blue-500/10 text-blue-400' : 'bg-emerald-500/10 text-emerald-400'">
-                                <i class="fa-solid" :class="product.is_liquid == 1 ? 'fa-faucet-drip' : 'fa-box'"></i>
-                            </div>
-                            <span class="text-xs font-mono px-2 py-1 rounded bg-gray-200 dark:bg-black/40" 
-                                :class="parseFloat(product.stock_quantity) < parseFloat(product.min_stock) ? 'text-red-400' : 'text-gray-400'">
-                                Stock: <span x-text="parseFloat(product.stock_quantity).toFixed(2)"></span>
-                            </span>
+                        <!-- Header: Image or Icon -->
+                        <div class="mb-3 relative">
+                            <!-- Image Display -->
+                            <template x-if="product.image_path">
+                                <div class="w-full h-32 rounded-xl overflow-hidden mb-3 relative group-hover:scale-[1.02] transition-transform">
+                                    <img :src="product.image_path" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                    
+                                    <!-- Stock Badge over Image -->
+                                    <span class="absolute bottom-2 right-2 text-xs font-mono px-2 py-1 rounded bg-black/60 text-white backdrop-blur-sm border border-white/10" 
+                                        :class="parseFloat(product.stock_quantity) < parseFloat(product.min_stock) ? 'text-red-300 border-red-500/50' : 'text-gray-200'">
+                                        Stock: <span x-text="parseFloat(product.stock_quantity).toFixed(2)"></span>
+                                    </span>
+                                </div>
+                            </template>
+                            
+                            <!-- Fallback Icon Display -->
+                            <template x-if="!product.image_path">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/10"
+                                        :class="product.is_liquid == 1 ? 'bg-gradient-to-br from-blue-500/20 to-blue-600/10 text-blue-400' : 'bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 text-emerald-400'">
+                                        <i class="fa-solid text-xl" :class="product.is_liquid == 1 ? 'fa-faucet-drip' : 'fa-box'"></i>
+                                    </div>
+                                    <span class="text-xs font-mono px-2 py-1 rounded bg-gray-200 dark:bg-black/40 border border-transparent" 
+                                        :class="parseFloat(product.stock_quantity) < parseFloat(product.min_stock) ? 'text-red-400 border-red-500/30 bg-red-500/10' : 'text-gray-400'">
+                                        Stock: <span x-text="parseFloat(product.stock_quantity).toFixed(2)"></span>
+                                    </span>
+                                </div>
+                            </template>
                         </div>
 
                         <!-- Product Info -->
