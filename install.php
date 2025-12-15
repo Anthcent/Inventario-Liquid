@@ -5,7 +5,7 @@
 // Credenciales DIRECTAS del Hosting
 $host = 'sql101.infinityfree.com';
 $user = 'if0_40687916';
-$pass = 'wgLejdg0EC18';
+$pass = 'wgLejdg0ECl8';
 $dbname = 'if0_40687916_jabon';
 $port = '3306';
 

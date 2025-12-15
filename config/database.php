@@ -6,7 +6,7 @@
 $host = 'sql101.infinityfree.com';
 $dbname = 'if0_40687916_jabon';
 $username = 'if0_40687916';
-$password = 'wgLejdg0EC18'; // PASSWORD CORREGIDO: Termina en 18 (uno-ocho)
+$password = 'wgLejdg0ECl8'; // PASSWORD CORREGIDO: Termina en 18 (uno-ocho)
 $port = '3306';
 
 try {
