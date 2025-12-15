@@ -177,35 +177,35 @@
     }
 </style>
 
-<div x-data="pos" class="w-full px-4 md:px-6 h-[calc(100vh-80px)] flex flex-col lg:flex-row gap-4 pt-4 pb-4">
+<div x-data="pos" class="w-full px-2 md:px-6 h-[calc(100vh-60px)] md:h-[calc(100vh-80px)] flex flex-col lg:flex-row gap-3 md:gap-4 pt-2 md:pt-4 pb-2 md:pb-4">
     
     <!-- Left Column: Products -->
-    <div class="lg:w-2/3 flex flex-col h-full bg-transparent dark:bg-dark-bg">
+    <div class="lg:w-2/3 flex flex-col h-full bg-transparent dark:bg-dark-bg order-2 lg:order-1">
         <!-- Search Bar -->
-        <div class="mb-6 relative">
+        <div class="mb-4 relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <i class="fa-solid fa-search text-gray-400 text-lg"></i>
             </div>
-            <input x-model="search" type="text" placeholder="Buscar por nombre, código..." 
-                class="w-full bg-white dark:bg-dark-card border border-gray-200 dark:border-white/5 rounded-2xl py-4 pl-12 pr-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xl text-lg">
+            <input x-model="search" type="text" placeholder="Buscar..." 
+                class="w-full bg-white dark:bg-dark-card border border-gray-200 dark:border-white/5 rounded-2xl py-3 md:py-4 pl-12 pr-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-lg text-base md:text-lg">
         </div>
 
         <!-- Products Grid -->
-        <div class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
-             <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex-grow overflow-y-auto pr-1 md:pr-2 custom-scrollbar pb-20 lg:pb-0">
+             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                 <template x-for="product in filteredProducts" :key="product.id">
-                    <div @click="addToCart(product)" class="glass p-4 rounded-2xl border border-gray-200 dark:border-white/5 group hover:border-brand-500/30 transition-all relative overflow-hidden flex flex-col justify-between h-auto min-h-[200px] cursor-pointer active:scale-[0.98]">
+                    <div @click="addToCart(product)" class="glass p-3 md:p-4 rounded-xl md:rounded-2xl border border-gray-200 dark:border-white/5 group hover:border-brand-500/30 transition-all relative overflow-hidden flex flex-col justify-between h-auto min-h-[180px] md:min-h-[200px] cursor-pointer active:scale-[0.98]">
                         
                         <!-- Header: Image or Icon -->
-                        <div class="mb-3 relative">
+                        <div class="mb-2 md:mb-3 relative">
                             <!-- Image Display -->
                             <template x-if="product.image_path">
-                                <div class="w-full h-32 rounded-xl overflow-hidden mb-3 relative group-hover:scale-[1.02] transition-transform">
+                                <div class="w-full h-24 md:h-32 rounded-lg md:rounded-xl overflow-hidden mb-2 md:mb-3 relative group-hover:scale-[1.02] transition-transform">
                                     <img :src="product.image_path" class="w-full h-full object-cover">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                     
                                     <!-- Stock Badge over Image -->
-                                    <span class="absolute bottom-2 right-2 text-xs font-mono px-2 py-1 rounded bg-black/60 text-white backdrop-blur-sm border border-white/10" 
+                                    <span class="absolute bottom-1 right-1 md:bottom-2 md:right-2 text-[10px] md:text-xs font-mono px-1.5 py-0.5 rounded bg-black/60 text-white backdrop-blur-sm border border-white/10" 
                                         :class="parseFloat(product.stock_quantity) < parseFloat(product.min_stock) ? 'text-red-300 border-red-500/50' : 'text-gray-200'">
                                         Stock: <span x-text="parseFloat(product.stock_quantity).toFixed(2)"></span>
                                     </span>
@@ -214,12 +214,12 @@
                             
                             <!-- Fallback Icon Display -->
                             <template x-if="!product.image_path">
-                                <div class="flex justify-between items-start mb-3">
-                                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/10"
+                                <div class="flex justify-between items-start mb-2 md:mb-3">
+                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/10"
                                         :class="product.is_liquid == 1 ? 'bg-gradient-to-br from-blue-500/20 to-blue-600/10 text-blue-400' : 'bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 text-emerald-400'">
-                                        <i class="fa-solid text-xl" :class="product.is_liquid == 1 ? 'fa-faucet-drip' : 'fa-box'"></i>
+                                        <i class="fa-solid text-sm md:text-xl" :class="product.is_liquid == 1 ? 'fa-faucet-drip' : 'fa-box'"></i>
                                     </div>
-                                    <span class="text-xs font-mono px-2 py-1 rounded bg-gray-200 dark:bg-black/40 border border-transparent" 
+                                    <span class="text-[10px] md:text-xs font-mono px-1.5 py-0.5 rounded bg-gray-200 dark:bg-black/40 border border-transparent" 
                                         :class="parseFloat(product.stock_quantity) < parseFloat(product.min_stock) ? 'text-red-400 border-red-500/30 bg-red-500/10' : 'text-gray-400'">
                                         Stock: <span x-text="parseFloat(product.stock_quantity).toFixed(2)"></span>
                                     </span>
@@ -228,27 +228,27 @@
                         </div>
 
                         <!-- Product Info -->
-                        <div class="mb-4">
-                            <h3 class="font-bold text-gray-800 dark:text-gray-100 leading-tight mb-1" x-text="product.name"></h3>
-                            <p class="text-xs text-gray-500 truncate" x-text="product.category || 'General'"></p>
+                        <div class="mb-2 md:mb-4 flex-grow">
+                            <h3 class="font-bold text-gray-800 dark:text-gray-100 leading-tight mb-0.5 text-xs md:text-sm line-clamp-2" x-text="product.name"></h3>
+                            <p class="text-[10px] text-gray-500 truncate" x-text="product.category || 'General'"></p>
                         </div>
 
                         <!-- Price & Actions -->
                         <div>
-                            <div class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                            <div class="text-sm md:text-xl font-bold text-gray-900 dark:text-white mb-2 md:mb-3">
                                 $ <span x-text="product.price"></span>
-                                <span class="text-xs font-normal text-gray-500">/ <span x-text="product.display_unit"></span></span>
+                                <span class="text-[10px] md:text-xs font-normal text-gray-500">/ <span x-text="product.display_unit"></span></span>
                             </div>
                             
                             <!-- Action Buttons -->
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-2 gap-1 md:gap-2">
                                 <!-- Fast Add (1 Unit) -->
-                                <button @click.stop="addToCart(product)" class="bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1 active:scale-95">
+                                <button @click.stop="addToCart(product)" class="bg-gray-700 hover:bg-gray-600 text-white py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-colors flex items-center justify-center gap-1 active:scale-95">
                                     <i class="fa-solid fa-plus"></i> 1
                                 </button>
                                 
                                 <!-- Custom Add (Calculator) -->
-                                <button @click.stop="openCalculator(product)" class="bg-brand-600 hover:bg-brand-500 text-white py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1 shadow-lg shadow-brand-500/20 active:scale-95">
+                                <button @click.stop="openCalculator(product)" class="bg-brand-600 hover:bg-brand-500 text-white py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-colors flex items-center justify-center gap-1 shadow-lg shadow-brand-500/20 active:scale-95">
                                     <i class="fa-solid fa-calculator"></i>
                                 </button>
                             </div>
@@ -265,16 +265,29 @@
         </div>
     </div>
 
-    <!-- Right Column: Cart -->
-    <div class="lg:w-1/3 flex flex-col h-[600px] lg:h-full bg-white dark:bg-dark-card rounded-3xl border border-gray-200 dark:border-white/5 shadow-2xl overflow-hidden z-10 sticky bottom-4 lg:static">
+    <!-- Right Column: Cart (Mobile Optimized) -->
+    <div class="lg:w-1/3 flex flex-col lg:h-full bg-white dark:bg-dark-card rounded-t-3xl lg:rounded-3xl border-t lg:border border-gray-200 dark:border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] lg:shadow-2xl overflow-hidden z-30 fixed lg:static bottom-0 left-0 right-0 h-[80px] lg:h-auto transition-all duration-300"
+         :class="{'h-[80vh]': showMobileCart}"
+         order="1">
+        
+        <!-- Cart Toggle (Mobile Only) -->
+        <div @click="showMobileCart = !showMobileCart" class="lg:hidden w-full flex justify-center pt-2 pb-1 cursor-pointer">
+            <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+        </div>
+
         <!-- Cart Header -->
-        <div class="p-6 border-b border-gray-200 dark:border-white/5 bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-            <h2 class="text-xl font-bold flex items-center gap-3 text-gray-900 dark:text-white">
+        <div class="px-6 py-3 lg:p-6 border-b border-gray-200 dark:border-white/5 bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 flex justify-between items-center cursor-pointer lg:cursor-default"
+             @click="showMobileCart = !showMobileCart">
+            <h2 class="text-lg lg:text-xl font-bold flex items-center gap-3 text-gray-900 dark:text-white">
                 <div class="bg-brand-500 p-2 rounded-lg text-white">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-solid fa-cart-shopping text-sm lg:text-base"></i>
                 </div>
-                Ticket Actual
+                <span>Ticket</span>
+                <span class="lg:hidden text-sm bg-brand-100 text-brand-600 px-2 py-0.5 rounded-full" x-show="cart.length > 0">
+                    <span x-text="cart.length"></span> items
+                </span>
             </h2>
+            <div class="lg:hidden font-bold text-brand-500" x-text="'$' + parseFloat(cartTotal).toFixed(2)"></div>
         </div>
 
         <!-- Cart Items List -->
