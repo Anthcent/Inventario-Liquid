@@ -275,7 +275,7 @@
                 <div class="bg-brand-500 p-2 rounded-lg text-white">
                     <i class="fa-solid fa-cart-shopping text-sm lg:text-base"></i>
                 </div>
-                <span>Ticket Actual</span>
+                <span>Ticket Actual.</span>
                 <span class="lg:hidden text-sm bg-brand-100 text-brand-600 px-2 py-0.5 rounded-full" x-show="cart.length > 0">
                     <span x-text="cart.length"></span> items
                 </span>
