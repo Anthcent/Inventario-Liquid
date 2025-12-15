@@ -266,7 +266,7 @@
     </div>
 
     <!-- Right Column: Cart (Mobile Optimized) -->
-    <div class="lg:w-1/3 flex flex-col lg:h-full bg-white dark:bg-dark-card rounded-t-3xl lg:rounded-3xl border-t lg:border border-gray-200 dark:border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] lg:shadow-2xl overflow-hidden z-30 fixed lg:static bottom-0 left-0 right-0 h-[80px] lg:h-auto transition-all duration-300"
+    <div class="lg:w-1/3 flex flex-col lg:h-full bg-white dark:bg-dark-card rounded-t-3xl lg:rounded-3xl border-t lg:border border-gray-200 dark:border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] lg:shadow-2xl overflow-hidden z-30 fixed lg:static bottom-0 left-0 right-0 h-[80px] lg:h-full transition-all duration-300"
          :class="{'h-[80vh]': showMobileCart}"
          order="1">
         
@@ -277,12 +277,12 @@
 
         <!-- Cart Header -->
         <div class="px-6 py-3 lg:p-6 border-b border-gray-200 dark:border-white/5 bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 flex justify-between items-center cursor-pointer lg:cursor-default"
-             @click="showMobileCart = !showMobileCart">
+             @click="if(window.innerWidth < 1024) showMobileCart = !showMobileCart">
             <h2 class="text-lg lg:text-xl font-bold flex items-center gap-3 text-gray-900 dark:text-white">
                 <div class="bg-brand-500 p-2 rounded-lg text-white">
                     <i class="fa-solid fa-cart-shopping text-sm lg:text-base"></i>
                 </div>
-                <span>Ticket</span>
+                <span>Ticket Actual</span>
                 <span class="lg:hidden text-sm bg-brand-100 text-brand-600 px-2 py-0.5 rounded-full" x-show="cart.length > 0">
                     <span x-text="cart.length"></span> items
                 </span>
