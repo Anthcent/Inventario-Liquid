@@ -65,11 +65,25 @@ try {
     // Mensaje de error más descriptivo
     $errorMsg = "Error de conexión a base de datos";
     
-    if ($isLocal) {
-        // En local, mostrar error completo para debugging
-        die("❌ $errorMsg (LOCAL): " . $e->getMessage());
+    // MODO DEBUG: Mostrar información detallada (temporal)
+    $debugMode = true; // Cambiar a false después de solucionar
+    
+    if ($isLocal || $debugMode) {
+        // Mostrar error completo para debugging
+        echo "<div style='background: #1a1a1a; color: #fff; padding: 20px; font-family: monospace; border-left: 4px solid #ef4444;'>";
+        echo "<h3 style='color: #ef4444; margin-top: 0;'>❌ Error de Conexión</h3>";
+        echo "<p><strong>Entorno:</strong> " . ($isLocal ? "LOCAL" : "PRODUCCIÓN") . "</p>";
+        echo "<p><strong>Servidor:</strong> $serverName</p>";
+        echo "<p><strong>Host DB:</strong> $host</p>";
+        echo "<p><strong>Puerto:</strong> $port</p>";
+        echo "<p><strong>Base de datos:</strong> $dbname</p>";
+        echo "<p><strong>Usuario:</strong> $username</p>";
+        echo "<p><strong>Error:</strong> " . $e->getMessage() . "</p>";
+        echo "<p><strong>Código:</strong> " . $e->getCode() . "</p>";
+        echo "</div>";
+        die();
     } else {
-        // En producción, error genérico por seguridad
+        // En producción sin debug, error genérico por seguridad
         error_log("DB Error: " . $e->getMessage());
         die("❌ $errorMsg. Por favor contacta al administrador.");
     }
